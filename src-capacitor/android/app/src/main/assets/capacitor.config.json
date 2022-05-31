@@ -1,0 +1,10 @@
+{
+  "appId": "glex.mobile",
+  "appName": "Glex",
+  "bundledWebRuntime": false,
+  "npmClient": "yarn",
+  "webDir": "www",
+  "server": {
+    "url": "http://192.168.1.176:8080"
+  }
+}

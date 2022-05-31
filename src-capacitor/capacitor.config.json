@@ -1,0 +1,7 @@
+{
+  "appId": "glex.mobile",
+  "appName": "Glex",
+  "bundledWebRuntime": false,
+  "npmClient": "yarn",
+  "webDir": "www"
+}

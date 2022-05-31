@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Glex</string>
+    <string name="title_activity_main">Glex</string>
+    <string name="package_name">glex.mobile</string>
+    <string name="custom_url_scheme">glex.mobile</string>
+</resources>
