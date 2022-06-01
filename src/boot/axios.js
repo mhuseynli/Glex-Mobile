@@ -1,4 +1,7 @@
-import Vue from 'vue'
-import axios from 'axios'
+import axiosBase from "axios";
 
-Vue.prototype.$axios = axios
+const axios = axiosBase.create({
+//   baseURL: "http://cdp.az"
+});
+
+export { axios };

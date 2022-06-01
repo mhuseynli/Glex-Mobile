@@ -23,6 +23,7 @@ module.exports = function (/* ctx */) {
     boot: [
 
       'axios',
+      'repositories'
     ],
 
     // https://v1.quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
@@ -76,7 +77,7 @@ module.exports = function (/* ctx */) {
       open: true, // opens browser window automatically
       proxy: {
         '/api': {
-          target: 'http://glex.test/api/v1.0.0/',
+          target: 'https://api.glex.az/api/v1.0.0',
           changeOrigin: true,
           pathRewrite: {
             "^/api": ""

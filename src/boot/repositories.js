@@ -1,5 +1,4 @@
-import createRepository from '~/repositories/Repository'
+import Vue from 'vue'
+import RepositoryFactory from 'src/repositories/RepositoryFactory'
 
-export default (ctx, inject) => {
-  inject('repositories', createRepository(ctx.$axios))
-}
+Vue.prototype.$repositories = RepositoryFactory;
