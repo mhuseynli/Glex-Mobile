@@ -22,13 +22,63 @@
           fill="#F68722"
         />
       </svg>
-      <text-h1 class="main-title text-center text-dark">
+      <h1 class="main-title text-center text-dark q-mb-xl full-width">
         Xoş gəlmişsiniz! <br />
-        Hesabınıza daxil olun vəya qeydiyyatdan keçin
-      </text-h1>
+        Hesabınıza daxil olun və ya qeydiyyatdan keçin
+      </h1>
 
-      <q-form class="q-gutter-md w-full">
-        <q-input outlined v-model="text" label="Outlined" />
+      <q-form class="full-width">
+        <q-input
+          class="q-mb-md"
+          type="email"
+          v-model="email"
+          outlined
+          label="Email"
+          :rules="[(val) => !!val || 'Bu sahə doldurulmalıdır', isValidEmail]"
+        />
+        <q-input
+          class="q-mb-lg"
+          v-model="password"
+          outlined
+          :type="isPwd ? 'password' : 'text'"
+          label="Şifrə"
+          :rules="[
+            (val) => !!val || 'Bu sahə doldurulmalıdır',
+            (val) => val.length >= 6 || 'Şifrə ən az 6 simvol olmalıdır',
+          ]"
+        >
+          <template v-slot:append>
+            <q-icon
+              :name="isPwd ? 'visibility_off' : 'visibility'"
+              class="cursor-pointer"
+              @click="isPwd = !isPwd"
+            />
+          </template>
+        </q-input>
+
+        <q-btn
+          type="submit"
+          unelevated
+          no-caps
+          class="q-mb-md"
+          color="primary full-width"
+          label="Daxil ol"
+        />
+
+        <div class="text-center full-width q-mb-xl">
+          <router-link to="/password-recovery">
+            Şifrəni unutmusunuz?
+          </router-link>
+        </div>
+
+        <q-btn
+          :to="{ name: 'Registration' }"
+          unelevated
+          outline
+          no-caps
+          color="primary full-width"
+          label="Qeydiyyat"
+        />
       </q-form>
     </div>
   </section>
@@ -37,6 +87,23 @@
 <script>
 export default {
   name: "Login",
+
+  data() {
+    return {
+      email: null,
+      password: null,
+      isPwd: true,
+    };
+  },
+  methods: {
+    isValidEmail() {
+      const emailPattern =
+        /^(?=[a-zA-Z0-9@._%+-]{6,254}$)[a-zA-Z0-9._%+-]{1,64}@(?:[a-zA-Z0-9-]{1,63}\.){1,8}[a-zA-Z]{2,63}$/;
+      return (
+        emailPattern.test(this.email) || "Email düzgün formatda daxil olunmayıb"
+      );
+    },
+  },
 };
 </script>
 

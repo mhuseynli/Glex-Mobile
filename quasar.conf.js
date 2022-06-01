@@ -73,7 +73,16 @@ module.exports = function (/* ctx */) {
     devServer: {
       https: false,
       port: 8080,
-      open: true // opens browser window automatically
+      open: true, // opens browser window automatically
+      proxy: {
+        '/api': {
+          target: 'http://glex.test/api/v1.0.0/',
+          changeOrigin: true,
+          pathRewrite: {
+            "^/api": ""
+          }
+        }
+      }
     },
 
     // https://v1.quasar.dev/quasar-cli/quasar-conf-js#Property%3A-framework
