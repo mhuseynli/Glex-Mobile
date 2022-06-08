@@ -43,6 +43,7 @@ module.exports = function (/* ctx */) {
 
       'roboto-font', // optional, you are not bound to it
       'material-icons', // optional, you are not bound to it
+      'material-icons-outlined'
     ],
 
     // Full list of options: https://v1.quasar.dev/quasar-cli/quasar-conf-js#Property%3A-build
@@ -77,7 +78,7 @@ module.exports = function (/* ctx */) {
       open: true, // opens browser window automatically
       proxy: {
         '/api': {
-          target: 'https://api.glex.az/api/v1.0.0',
+          target: 'http://glex.test/api/v1.0.0',
           changeOrigin: true,
           pathRewrite: {
             "^/api": ""

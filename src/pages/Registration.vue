@@ -195,10 +195,10 @@ export default {
       terms_dialog: false,
     };
   },
- async created() {
-   const res = await this.$repositories.get("common").about()
-   console.log(res);
-  },
+  // async created() {
+  //   const res = await this.$repositories.get("common").about();
+  //   console.log(res);
+  // },
   methods: {
     isValidEmail() {
       const emailPattern =

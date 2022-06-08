@@ -41,9 +41,9 @@ import StaticRepository from "./StaticRepository";
 
 const repositories = {
   // * PUBLIC
-  'common': StaticRepository,
-}
+  common: StaticRepository,
+};
 
 export default {
-  get: name => repositories[name]
+  get: (name) => repositories[name],
 };

@@ -1,4 +1,4 @@
-import {axios} from "src/boot/axios"
+import { axios } from "src/boot/axios";
 
 const resource = "/api/page";
 const resource_contact = "/api/contact";
@@ -45,8 +45,8 @@ export default {
           full_name: payload.full_name,
           email: payload.email,
           subject: payload.subject,
-          text: payload.text
-        }
+          text: payload.text,
+        },
       });
 
       return data;
@@ -55,5 +55,5 @@ export default {
         return error.response;
       }
     }
-  }
+  },
 };
