@@ -110,3 +110,20 @@ $text-main-white: #f7f7f7;
     }
   }
 }
+
+// # MENU
+
+.menu {
+  padding: 16px 24px;
+
+  .q-item {
+    padding: 21px 5px;
+  }
+
+  &__item-label {
+    font-family: m_m_medium;
+    font-size: 18px;
+    line-height: 22px;
+    color: $text-secondary;
+  }
+}
