@@ -3,7 +3,7 @@
 // import NewsRepository from "./NewsRepository";
 // import RegistrationRepository from "./RegistrationRepository";
 // import RecoveryRepository from "./RecoveryRepository";
-// import LoginRepository from "./LoginRepository";
+import LoginRepository from "./LoginRepository";
 // import PaymentRepository from "./PaymentRepository";
 // import DeclarationsRepository from "./DeclarationsRepository";
 // import OrdersRepository from "./OrdersRepository";
@@ -40,7 +40,10 @@ import StaticRepository from "./StaticRepository";
 // });
 
 const repositories = {
-  // * PUBLIC
+  // # AUTH
+  login: LoginRepository,
+
+  // # PUBLIC
   common: StaticRepository,
 };
 

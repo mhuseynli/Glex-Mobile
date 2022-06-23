@@ -1,16 +1,18 @@
-const resource_login = "api/login";
-const resource_logout = "api/logout";
+import { axios } from "src/boot/axios";
 
-export default $axios => ({
+const resource_login = "/api/login";
+const resource_logout = "/api/logout";
+
+export default {
   async login(payload) {
     try {
-      const data = await $axios({
+      const data = await axios({
         method: "POST",
         url: resource_login,
         data: {
           email: payload.email,
-          password: payload.password
-        }
+          password: payload.password,
+        },
       });
 
       return data;
@@ -23,9 +25,9 @@ export default $axios => ({
 
   async logout(payload) {
     try {
-      const data = await $axios({
+      const data = await axios({
         method: "POST",
-        url: resource_logout
+        url: resource_logout,
       });
 
       return data;
@@ -34,5 +36,5 @@ export default $axios => ({
         return error.response;
       }
     }
-  }
-});
+  },
+};

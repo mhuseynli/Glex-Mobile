@@ -27,7 +27,7 @@
         Hesabınıza daxil olun və ya qeydiyyatdan keçin
       </h1>
 
-      <q-form class="full-width">
+      <q-form @submit.prevent="onLogin" class="full-width">
         <q-input
           class="q-mb-md"
           type="email"
@@ -102,6 +102,35 @@ export default {
       return (
         emailPattern.test(this.email) || "Email düzgün formatda daxil olunmayıb"
       );
+    },
+
+    async onLogin() {
+      /* * platform detector
+         ? this.$q.platform.is;
+      */
+      // this.loginForm.isLoading = true;
+      // const res = await this.$repositories.login.login({
+      //   email: this.loginForm.email,
+      //   password: this.loginForm.password.value,
+      //   os: this.$ua.os(),
+      //   browser: this.$ua.browser(),
+      // });
+      const res = await this.$repositories.get("login").login({
+        email: this.email,
+        password: this.password,
+      });
+      // //   console.log(res);
+      //
+      // if (res.status === 200) {
+      //   this.logUserIn(res.data.data);
+      //   this.loginForm.isLoading = false;
+      // } else if (res.data.errors) {
+      //   this.loginForm.errors = res.data.errors;
+      //   this.loginForm.isLoading = false;
+      // } else {
+      //   this.loginForm.errors.generic = res.data.data.message;
+      //   this.loginForm.isLoading = false;
+      // }
     },
   },
 };
