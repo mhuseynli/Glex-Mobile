@@ -85,6 +85,8 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 export default {
   name: "Login",
 
@@ -96,6 +98,8 @@ export default {
     };
   },
   methods: {
+    ...mapActions("user", ["logUserIn"]),
+
     isValidEmail() {
       const emailPattern =
         /^(?=[a-zA-Z0-9@._%+-]{6,254}$)[a-zA-Z0-9._%+-]{1,64}@(?:[a-zA-Z0-9-]{1,63}\.){1,8}[a-zA-Z]{2,63}$/;
@@ -105,26 +109,17 @@ export default {
     },
 
     async onLogin() {
-      /* * platform detector
-         ? this.$q.platform.is;
-      */
-      // this.loginForm.isLoading = true;
-      // const res = await this.$repositories.login.login({
-      //   email: this.loginForm.email,
-      //   password: this.loginForm.password.value,
-      //   os: this.$ua.os(),
-      //   browser: this.$ua.browser(),
-      // });
       const res = await this.$repositories.get("login").login({
         email: this.email,
         password: this.password,
       });
-      // //   console.log(res);
-      //
-      // if (res.status === 200) {
-      //   this.logUserIn(res.data.data);
-      //   this.loginForm.isLoading = false;
-      // } else if (res.data.errors) {
+
+      if (res.status === 200) {
+        this.logUserIn(res.data.data);
+        // this.loginForm.isLoading = false;
+      }
+
+      // else if (res.data.errors) {
       //   this.loginForm.errors = res.data.errors;
       //   this.loginForm.isLoading = false;
       // } else {
