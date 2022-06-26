@@ -3,6 +3,8 @@ import VueRouter from "vue-router";
 
 import routes from "./routes";
 
+import { LocalStorage } from "quasar";
+
 Vue.use(VueRouter);
 
 /*
@@ -31,7 +33,7 @@ export default function (/* { store, ssrContext } */) {
   const publicPages = ["Login", "Registration"];
 
   Router.beforeEach((to, from, next) => {
-    if (!publicPages.includes(to.name)) {
+    if (!publicPages.includes(to.name) && !LocalStorage.getItem("token")) {
       next({ name: "Login" });
     } else {
       next();

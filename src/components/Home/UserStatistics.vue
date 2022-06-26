@@ -21,7 +21,10 @@
       <div class="media-body">
         <p class="user-st-title">Bu ay üzrə limit</p>
 
-        <p class="user-st-text">95 USD</p>
+        <p v-if="userStatistics.monthly_limit" class="user-st-text">
+          {{ userStatistics.monthly_limit }} USD
+        </p>
+        <q-skeleton v-else width="138px" height="32px" type="rect" />
       </div>
     </div>
     <div class="media user-statistics__item">
@@ -59,7 +62,10 @@
       <div class="media-body">
         <p class="user-st-title">Daşınma balansım</p>
 
-        <p class="user-st-text">100 USD</p>
+        <p v-if="userStatistics.balance_tr" class="user-st-text">
+          {{ userStatistics.balance_tr }} USD
+        </p>
+        <q-skeleton v-else width="138px" height="32px" type="rect" />
       </div>
     </div>
     <div class="media user-statistics__item">
@@ -82,15 +88,24 @@
       <div class="media-body">
         <p class="user-st-title">Sifariş et balansım</p>
 
-        <p class="user-st-text">500 TL</p>
+        <p v-if="userStatistics.balance_tr" class="user-st-text">
+          {{ userStatistics.balance_tr }} TL
+        </p>
+        <q-skeleton v-else width="138px" height="32px" type="rect" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   name: "UserStatistics",
+
+  computed: {
+    ...mapGetters("user", ["userStatistics"]),
+  },
 };
 </script>
 

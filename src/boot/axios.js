@@ -1,5 +1,5 @@
 import axiosBase from "axios";
-import { Platform } from 'quasar'
+import { Platform } from "quasar";
 
 const axios = axiosBase.create({
   //   baseURL: "http://cdp.az"
