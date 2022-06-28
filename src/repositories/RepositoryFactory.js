@@ -11,7 +11,7 @@ import LoginRepository from "./LoginRepository";
 // import SettingsRepository from "./SettingsRepository";
 // import AddressesAbroad from "./AddressesAbroad";
 // import AddressesLocal from "./AddressesLocal";
-// import UserRepository from "./UserRepository";
+import UserRepository from "./UserRepository";
 import StaticRepository from "./StaticRepository";
 // import CommitmentsRepository from "./CommitmentsRepository";
 
@@ -42,6 +42,7 @@ import StaticRepository from "./StaticRepository";
 const repositories = {
   // # AUTH
   login: LoginRepository,
+  user: UserRepository,
 
   // # PUBLIC
   common: StaticRepository,

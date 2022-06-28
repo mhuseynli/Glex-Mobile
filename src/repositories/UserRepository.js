@@ -1,11 +1,13 @@
-const resource = "api/userdata";
+import { axios } from "src/boot/axios";
 
-export default $axios => ({
+const resource = "/api/userdata";
+
+export default {
   async data() {
     try {
-      const data = await $axios({
+      const data = await axios({
         method: "GET",
-        url: resource
+        url: resource,
       });
 
       return data;
@@ -14,5 +16,5 @@ export default $axios => ({
         return error.response;
       }
     }
-  }
-});
+  },
+};
