@@ -30,15 +30,11 @@ export default function (/* { store, ssrContext } */) {
 
   // todo: route adlarin lower case olmalidir.
 
-  const publicPages = ["Login", "Registration"];
+  const publicPages = ["login", "registration"];
 
   Router.beforeEach((to, from, next) => {
-<<<<<<< HEAD
-    if (!publicPages.includes(to.name) && !LocalStorage.has("token")) {
-=======
     if (!publicPages.includes(to.name) && !LocalStorage.getItem("token")) {
->>>>>>> bbeffbaf451a6d34a9752694ecc79a1d2f341b31
-      next({ name: "Login" });
+      next({ name: "login" });
     } else {
       next();
     }

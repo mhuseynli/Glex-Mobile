@@ -5,13 +5,18 @@ const routes = [
     children: [
       {
         path: "",
-        name: "Home",
+        name: "home",
         component: () => import("pages/Index.vue"),
       },
       {
         path: "/menu",
-        name: "Menu",
+        name: "menu",
         component: () => import("pages/Menu.vue"),
+      },
+      {
+        path: "/parcels",
+        name: "parcels",
+        component: () => import("pages/Parcels.vue"),
       },
     ],
   },
@@ -21,12 +26,12 @@ const routes = [
     children: [
       {
         path: "login",
-        name: "Login",
+        name: "login",
         component: () => import("pages/Login.vue"),
       },
       {
         path: "register",
-        name: "Registration",
+        name: "registration",
         component: () => import("pages/Registration.vue"),
       },
     ],

@@ -96,7 +96,7 @@
         </svg>
       </q-item-section>
 
-      <q-item-section>Bağlamalarım</q-item-section>
+      <q-item-section class="menu__item-label">Bağlamalarım</q-item-section>
     </q-item>
   </q-list>
 </template>

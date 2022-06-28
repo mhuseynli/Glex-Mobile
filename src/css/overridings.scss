@@ -80,6 +80,7 @@ a {
     line-height: 12px;
     width: 74px;
     height: 50px;
+    letter-spacing: 0.4px;
 
     svg {
       margin-bottom: 6px;
@@ -87,11 +88,11 @@ a {
   }
 
   .q-router-link--exact-active {
-    color: #F16025;
+    color: #f16025;
 
     svg {
       path {
-        fill: #F16025;
+        fill: #f16025;
       }
     }
   }

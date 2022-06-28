@@ -72,7 +72,7 @@
         </div>
 
         <q-btn
-          :to="{ name: 'Registration' }"
+          :to="{ name: 'registration' }"
           unelevated
           outline
           no-caps

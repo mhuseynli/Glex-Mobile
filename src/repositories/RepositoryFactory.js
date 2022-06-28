@@ -5,7 +5,7 @@
 // import RecoveryRepository from "./RecoveryRepository";
 import LoginRepository from "./LoginRepository";
 // import PaymentRepository from "./PaymentRepository";
-// import DeclarationsRepository from "./DeclarationsRepository";
+import DeclarationsRepository from "./DeclarationsRepository";
 // import OrdersRepository from "./OrdersRepository";
 // import CourierRepository from "./CourierRepository";
 // import SettingsRepository from "./SettingsRepository";
@@ -46,6 +46,9 @@ const repositories = {
 
   // # PUBLIC
   common: StaticRepository,
+
+  // # DASHBOARD
+  declarations: DeclarationsRepository,
 };
 
 export default {
