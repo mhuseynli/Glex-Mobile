@@ -9,6 +9,10 @@ $text-page-title: #0f172a;
   box-sizing: border-box;
 }
 
+body {
+  background-color: #e5e5e5;
+}
+
 .top-gradient {
   &:after {
     content: "";
@@ -54,11 +58,6 @@ $text-page-title: #0f172a;
 .terms-dialog {
   border-radius: 32px 32px 0px 0px !important;
   padding: 45px 24px;
-}
-
-.main-wrapper {
-  background-color: #e5e5e5;
-  height: 100vh;
 }
 
 .primary-detail-title {
@@ -221,6 +220,55 @@ $text-page-title: #0f172a;
       display: flex;
       align-items: center;
       justify-content: center;
+    }
+  }
+}
+
+// # Cards
+
+.product-card {
+  background: #ffffff;
+  box-shadow: 0px 12px 56px rgba(0, 0, 0, 0.06);
+  border-radius: 8px;
+
+  .parcel-tracking {
+    span {
+      display: block;
+      &:first-child {
+        font-family: m_m_medium;
+        font-size: 16px;
+        line-height: 20px;
+        color: $text-main;
+      }
+
+      &:last-child {
+        font-family: m_m_medium;
+        font-size: 16px;
+        line-height: 20px;
+        color: $text-secondary;
+      }
+    }
+  }
+
+  &__data {
+    .col-6:not(:last-child) {
+      margin-bottom: 24px;
+    }
+
+    .field-desc {
+      font-family: m_m_regular;
+      color: $text-secondary;
+      font-size: 14px;
+      line-height: 18px;
+      margin: 0;
+    }
+
+    .field-val {
+      font-family: m_m_medium;
+      color: $text-main;
+      font-size: 16px;
+      line-height: 20px;
+      margin: 0;
     }
   }
 }

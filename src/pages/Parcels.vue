@@ -1,6 +1,6 @@
 <template>
   <div class="q-pa-md">
-    <div v-if="headings" class="product-status">
+    <div v-if="!headingsLoading" class="product-status">
       <div
         v-for="heading in headings"
         :key="heading.id"
@@ -19,7 +19,13 @@
       </div>
     </div>
 
-    <ParcelsList />
+    <div class="flex q-mb-md q-gutter-sm no-wrap" v-else>
+      <q-skeleton height="100px" width="116px" type="rect" />
+      <q-skeleton height="100px" width="116px" type="rect" />
+      <q-skeleton height="100px" width="116px" type="rect" />
+    </div>
+
+    <ParcelsList :parcels="parcels" :isLoading="parcelsLoading" />
   </div>
 </template>
 
@@ -33,14 +39,16 @@ export default {
 
   components: {
     HeadingIcons,
-    ParcelsList
+    ParcelsList,
   },
 
   data() {
     return {
       headings: null,
+      headingsLoading: false,
       activeStatusId: null,
-      declarations: null,
+      parcels: null,
+      parcelsLoading: false,
     };
   },
 
@@ -54,10 +62,12 @@ export default {
     ...mapActions("shared", ["setPageTitle"]),
 
     async getHeaders() {
+      this.headingsLoading = true;
       const res = await this.$repositories.get("declarations").headings();
 
       if (res.status === 200) {
         this.headings = res.data.data.declaration_headers;
+        this.headingsLoading = false;
       } else {
         this.$q.notify({
           message: "Xəta baş verdi.",
@@ -67,6 +77,7 @@ export default {
     },
 
     async getByStatusId(id) {
+      this.parcelsLoading = true;
       const res = await this.$repositories
         .get("declarations")
         .getByStatusId(id);
@@ -74,10 +85,11 @@ export default {
       const { declarations } = res.data.data;
 
       if (res.status === 200) {
+        this.parcelsLoading = false;
         this.activeStatusId = id;
 
-        this.declarations = declarations;
-        this.declarations.forEach((i) => {
+        this.parcels = declarations;
+        this.parcels.forEach((i) => {
           i.checked = false;
         });
       }
