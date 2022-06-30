@@ -1,9 +1,7 @@
 <template>
   <q-header class="bg-white page-header">
     <div class="row justify-between items-center">
-      <router-link to="/">
-        <q-icon name="keyboard_backspace" size="sm"></q-icon>
-      </router-link>
+      <q-btn @click="$router.go(-1)" round color="black" size="md" dense flat icon="keyboard_backspace" />
 
       <h2 class="page-header__title">{{ pageTitle }}</h2>
 

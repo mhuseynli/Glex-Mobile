@@ -16,7 +16,13 @@ const routes = [
       {
         path: "/parcels",
         name: "parcels",
-        component: () => import("pages/Parcels.vue"),
+        component: () => import("pages/Parcels/Parcels.vue"),
+      },
+      {
+        path: "/parcels/:id",
+        name: "parcel-details",
+        props: true,
+        component: () => import("pages/Parcels/ParcelDetails.vue"),
       },
     ],
   },

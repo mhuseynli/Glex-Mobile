@@ -12,29 +12,12 @@
           <span> {{ parcel.trn_number }} </span>
         </div>
         <div>
-          <svg
+          <q-btn
             @click="copyTrackingId(parcel.trn_number)"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M20 9H11C9.89543 9 9 9.89543 9 11V20C9 21.1046 9.89543 22 11 22H20C21.1046 22 22 21.1046 22 20V11C22 9.89543 21.1046 9 20 9Z"
-              stroke="#585C5E"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-            <path
-              d="M5 15H4C3.46957 15 2.96086 14.7893 2.58579 14.4142C2.21071 14.0392 2 13.5305 2 13V4.00003C2 3.4696 2.21071 2.96089 2.58579 2.58582C2.96086 2.21074 3.46957 2.00003 4 2.00003H13C13.5304 2.00003 14.0391 2.21074 14.4142 2.58582C14.7893 2.96089 15 3.4696 15 4.00003V5.00003"
-              stroke="#585C5E"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
+            round
+            flat
+            icon="img:icons/copy.svg"
+          />
         </div>
       </q-card-section>
 
@@ -67,10 +50,17 @@
         </div>
       </q-card-section>
 
-      <!--    <q-card-actions vertical>-->
-      <!--      <q-btn flat>Action 1</q-btn>-->
-      <!--      <q-btn flat>Action 2</q-btn>-->
-      <!--    </q-card-actions>-->
+      <q-card-actions class="q-px-lg q-pt-none q-pb-lg">
+        <q-btn
+          @click="showParcelDetails(parcel)"
+          outline
+          no-caps
+          class="btn btn-simple full-width items-center"
+        >
+          <q-icon size="16px" class="q-mr-sm" name="img:icons/file-text.svg" />
+          Ətraflı bax
+        </q-btn>
+      </q-card-actions>
     </q-card>
   </div>
   <div v-else>
@@ -83,6 +73,8 @@
 import { copyToClipboard } from "quasar";
 
 export default {
+  name: "ParcelsList",
+
   props: {
     parcels: {
       type: Array,
@@ -93,7 +85,6 @@ export default {
       default: false,
     },
   },
-  name: "ParcelsList",
 
   methods: {
     copyTrackingId(id) {
@@ -110,6 +101,16 @@ export default {
             color: "red",
           });
         });
+    },
+
+    showParcelDetails(parcel) {
+      this.$router.push({
+        name: "parcel-details",
+        params: {
+          id: parcel.id,
+          parcel: parcel,
+        },
+      });
     },
   },
 };

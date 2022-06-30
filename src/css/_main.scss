@@ -1,7 +1,4 @@
-$text-main: #24282a;
-$text-secondary: #585c5e;
-$text-main-white: #f7f7f7;
-$text-page-title: #0f172a;
+@import "variables";
 
 * {
   margin: 0;
@@ -270,5 +267,25 @@ body {
       line-height: 20px;
       margin: 0;
     }
+  }
+}
+
+.details-card {
+  filter: drop-shadow(0px 12px 56px rgba(0, 0, 0, 0.06));
+  box-shadow: none;
+  border-radius: 8px;
+
+  .field-desc {
+    font-family: m_m_medium;
+    font-size: 16px;
+    line-height: 20px;
+    color: $text-secondary;
+  }
+
+  .field-val {
+    font-family: m_m_medium;
+    font-size: 16px;
+    line-height: 20px;
+    color: $text-main;
   }
 }

@@ -1,0 +1,21 @@
+@import "variables";
+
+// # Buttons
+.btn {
+  font-size: 14px;
+  line-height: 18px;
+  font-family: m_m_medium;
+
+  .q-btn__content {
+    align-items: center;
+  }
+
+  &-simple {
+    color: $text-secondary;
+    border-radius: 8px;
+
+    .q-btn__wrapper:before {
+      border: $main-stroke;
+    }
+  }
+}
