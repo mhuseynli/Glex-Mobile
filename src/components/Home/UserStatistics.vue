@@ -21,7 +21,7 @@
       <div class="media-body">
         <p class="user-st-title">Bu ay üzrə limit</p>
 
-        <p v-if="userStatistics.monthly_limit" class="user-st-text">
+        <p v-if="userStatistics.monthly_limit !== null" class="user-st-text">
           {{ userStatistics.monthly_limit }} USD
         </p>
         <q-skeleton v-else width="138px" height="32px" type="rect" />
@@ -62,7 +62,7 @@
       <div class="media-body">
         <p class="user-st-title">Daşınma balansım</p>
 
-        <p v-if="userStatistics.balance_tr" class="user-st-text">
+        <p v-if="userStatistics.balance_tr !== null" class="user-st-text">
           {{ userStatistics.balance_tr }} USD
         </p>
         <q-skeleton v-else width="138px" height="32px" type="rect" />
@@ -88,7 +88,7 @@
       <div class="media-body">
         <p class="user-st-title">Sifariş et balansım</p>
 
-        <p v-if="userStatistics.balance_tr" class="user-st-text">
+        <p v-if="userStatistics.balance_tr !== null" class="user-st-text">
           {{ userStatistics.balance_tr }} TL
         </p>
         <q-skeleton v-else width="138px" height="32px" type="rect" />

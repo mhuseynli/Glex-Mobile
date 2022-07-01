@@ -55,7 +55,7 @@
           @click="showParcelDetails(parcel)"
           outline
           no-caps
-          class="btn btn-simple full-width items-center"
+          class="btn btn-simple full-width items-center q-py-xs"
         >
           <q-icon size="16px" class="q-mr-sm" name="img:icons/file-text.svg" />
           Ətraflı bax

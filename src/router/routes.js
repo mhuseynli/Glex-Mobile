@@ -24,6 +24,11 @@ const routes = [
         props: true,
         component: () => import("pages/Parcels/ParcelDetails.vue"),
       },
+      {
+        path: "/declarations",
+        name: "declarations",
+        component: () => import("pages/Declarations/Declarations.vue"),
+      },
     ],
   },
   {

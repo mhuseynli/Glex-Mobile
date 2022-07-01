@@ -31,7 +31,13 @@
         </q-btn>
       </div>
       <div class="col-4">
-        <q-btn color="white" class="full-width" no-caps unelevated>
+        <q-btn
+          :to="{ name: 'parcels' }"
+          color="white"
+          class="full-width"
+          no-caps
+          unelevated
+        >
           <svg
             width="34"
             height="34"
@@ -113,7 +119,13 @@
         </q-btn>
       </div>
       <div class="col-4">
-        <q-btn color="white" class="full-width" no-caps unelevated>
+        <q-btn
+          :to="{ name: 'declarations' }"
+          color="white"
+          class="full-width"
+          no-caps
+          unelevated
+        >
           <svg
             width="32"
             height="32"

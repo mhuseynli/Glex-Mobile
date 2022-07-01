@@ -53,9 +53,9 @@ export default {
   },
 
   async created() {
+    this.setPageTitle("Bağlamalarım");
     await this.getHeaders();
     await this.getByStatusId(4);
-    this.setPageTitle("Bağlamalarım");
   },
 
   methods: {
@@ -77,21 +77,23 @@ export default {
     },
 
     async getByStatusId(id) {
-      this.parcelsLoading = true;
-      const res = await this.$repositories
-        .get("declarations")
-        .getByStatusId(id);
+      if (id !== this.activeStatusId) {
+        this.parcelsLoading = true;
+        const res = await this.$repositories
+          .get("declarations")
+          .getByStatusId(id);
 
-      const { declarations } = res.data.data;
+        const { declarations } = res.data.data;
 
-      if (res.status === 200) {
-        this.parcelsLoading = false;
-        this.activeStatusId = id;
+        if (res.status === 200) {
+          this.parcelsLoading = false;
+          this.activeStatusId = id;
 
-        this.parcels = declarations;
-        this.parcels.forEach((i) => {
-          i.checked = false;
-        });
+          this.parcels = declarations;
+          this.parcels.forEach((i) => {
+            i.checked = false;
+          });
+        }
       }
     },
   },

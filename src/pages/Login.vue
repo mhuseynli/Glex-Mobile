@@ -131,4 +131,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped>
+.q-btn {
+  border-radius: 8px;
+}
+</style>

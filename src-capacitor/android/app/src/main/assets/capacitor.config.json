@@ -4,7 +4,9 @@
   "bundledWebRuntime": false,
   "npmClient": "yarn",
   "webDir": "www",
-  "server": {
-    "url": "http://192.168.1.176:8080"
+  "plugins": {
+    "SplashScreen": {
+      "androidScaleType": "CENTER_CROP"
+    }
   }
 }
