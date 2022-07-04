@@ -29,6 +29,17 @@ const routes = [
         name: "declarations",
         component: () => import("pages/Declarations/Declarations.vue"),
       },
+      {
+        path: "/declarations/:id",
+        name: "declaration-details",
+        props: true,
+        component: () => import("pages/Declarations/DeclarationDetails.vue"),
+      },
+      {
+        path: "/declarations/update/:id",
+        name: "update-declaration",
+        component: () => import("pages/Declarations/UpdateDeclaration.vue"),
+      },
     ],
   },
   {

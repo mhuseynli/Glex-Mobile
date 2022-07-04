@@ -27,7 +27,14 @@
         <div class="row">
           <div class="col-6">
             <p class="field-desc">Ölkə / Mağaza</p>
-            <p class="field-val">{{ declaration.shop }}</p>
+            <p class="field-val flex items-center">
+              <q-icon
+                size="16px"
+                class="q-mr-sm"
+                :name="`img:icons/${declaration.image}`"
+              />
+              {{ declaration.shop }}
+            </p>
           </div>
           <div class="col-6">
             <p class="field-desc">Kateqoriya</p>
@@ -50,17 +57,26 @@
         </div>
       </q-card-section>
 
-      <!--      <q-card-actions class="q-px-lg q-pt-none q-pb-lg">-->
-      <!--        <q-btn-->
-      <!--          @click="showParcelDetails(parcel)"-->
-      <!--          outline-->
-      <!--          no-caps-->
-      <!--          class="btn btn-simple full-width items-center q-py-xs"-->
-      <!--        >-->
-      <!--          <q-icon size="16px" class="q-mr-sm" name="img:icons/file-text.svg" />-->
-      <!--          Ətraflı bax-->
-      <!--        </q-btn>-->
-      <!--      </q-card-actions>-->
+      <q-card-actions class="q-px-lg q-pt-none q-pb-lg">
+        <q-btn
+          @click="showDeclarationDetails(declaration)"
+          outline
+          no-caps
+          class="btn btn-simple items-center q-py-xs col-grow"
+        >
+          <q-icon size="16px" class="q-mr-sm" name="img:icons/file-text.svg" />
+          Ətraflı bax
+        </q-btn>
+        <q-btn
+          :to="{ name: 'update-declaration', params: { id: declaration.id } }"
+          outline
+          no-caps
+          class="btn btn-simple items-center q-py-xs col-grow"
+        >
+          <q-icon size="16px" class="q-mr-sm" name="img:icons/edit.svg" />
+          Düzəliş et
+        </q-btn>
+      </q-card-actions>
     </q-card>
   </div>
   <div v-else>
@@ -101,6 +117,16 @@ export default {
             color: "red",
           });
         });
+    },
+
+    showDeclarationDetails(declaration) {
+      this.$router.push({
+        name: "declaration-details",
+        params: {
+          id: declaration.id,
+          declaration: declaration,
+        },
+      });
     },
   },
 };
