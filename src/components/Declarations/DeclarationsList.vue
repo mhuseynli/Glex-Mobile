@@ -33,7 +33,9 @@
                 class="q-mr-sm"
                 :name="`img:icons/${declaration.image}`"
               />
-              {{ declaration.shop }}
+              <span class="long-text">
+                {{ declaration.shop }}
+              </span>
             </p>
           </div>
           <div class="col-6">
@@ -48,12 +50,35 @@
             <p class="field-desc">Qiyməti</p>
             <p class="field-val">{{ declaration.price }} TL</p>
           </div>
-          <!--          <div class="col-6">-->
-          <!--            <p class="field-desc">Daşınma xərci</p>-->
-          <!--            <p class="field-val">-->
-          <!--              {{ parcel.cargo_price }}$ ({{ parcel.convert_cargo_price }})-->
-          <!--            </p>-->
-          <!--          </div>-->
+          <div class="col-6">
+            <p class="field-desc">Status</p>
+            <p class="field-val">
+              <q-badge
+                :color="
+                  getStatus(
+                    declaration.noInvoice,
+                    declaration.stockCustomsView,
+                    declaration.noCustomsInvoice
+                  ).color
+                "
+                :text-color="
+                  getStatus(
+                    declaration.noInvoice,
+                    declaration.stockCustomsView,
+                    declaration.noCustomsInvoice
+                  ).textColor
+                "
+                :label="
+                  getStatus(
+                    declaration.noInvoice,
+                    declaration.stockCustomsView,
+                    declaration.noCustomsInvoice
+                  ).status
+                "
+                class="q-pa-sm"
+              />
+            </p>
+          </div>
         </div>
       </q-card-section>
 
@@ -68,6 +93,11 @@
           Ətraflı bax
         </q-btn>
         <q-btn
+          v-if="
+            declaration.noInvoice === 1 &&
+            declaration.stockCustomsView === 0 &&
+            declaration.noCustomsInvoice === 1
+          "
           :to="{ name: 'update-declaration', params: { id: declaration.id } }"
           outline
           no-caps
@@ -99,6 +129,47 @@ export default {
     isLoading: {
       type: Boolean,
       default: false,
+    },
+  },
+
+  computed: {
+    getStatus() {
+      return (noInvoice, stockCustomsView, noCustomsInvoice) => {
+        if (
+          noInvoice === 1 &&
+          stockCustomsView === 0 &&
+          noCustomsInvoice === 1
+        ) {
+          // * Declaration awaits
+          return {
+            color: "red-2",
+            textColor: "negative",
+            status: "Bəyan gözləyir",
+          };
+        } else if (
+          noInvoice === 0 &&
+          stockCustomsView === 0 &&
+          noCustomsInvoice === 1
+        ) {
+          // * Declaration awaits customs confirmation
+          return {
+            color: "orange-2",
+            textColor: "primary",
+            status: "DGK təsdiq gözləyir",
+          };
+        } else if (
+          noInvoice === 0 &&
+          stockCustomsView === 1 &&
+          noCustomsInvoice === 0
+        ) {
+          // * Declaration confirmed
+          return {
+            color: "green-2",
+            textColor: "positive",
+            status: "Təsdiqlənib",
+          };
+        }
+      };
     },
   },
 

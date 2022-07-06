@@ -1,9 +1,7 @@
-import { axios } from "src/boot/axios";
-
 const resource_login = "/api/login";
 const resource_logout = "/api/logout";
 
-export default {
+export default (axios) => ({
   async login(payload) {
     try {
       const data = await axios({
@@ -37,4 +35,4 @@ export default {
       }
     }
   },
-};
+});

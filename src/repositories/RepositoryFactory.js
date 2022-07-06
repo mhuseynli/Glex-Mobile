@@ -1,3 +1,5 @@
+import { axios } from "src/boot/axios";
+
 // import TariffsRepository from "./TariffsRepository";
 // import IndexRepository from "./IndexRepository";
 // import NewsRepository from "./NewsRepository";
@@ -41,14 +43,16 @@ import StaticRepository from "./StaticRepository";
 
 const repositories = {
   // # AUTH
-  login: LoginRepository,
+  login: LoginRepository(axios),
+
+  // todo find a way to send it axios parameter
   user: UserRepository,
 
   // # PUBLIC
-  common: StaticRepository,
+  common: StaticRepository(axios),
 
   // # DASHBOARD
-  declarations: DeclarationsRepository,
+  declarations: DeclarationsRepository(axios),
 };
 
 export default {

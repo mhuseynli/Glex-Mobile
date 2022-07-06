@@ -1,5 +1,5 @@
 <template>
-  <div class="q-pa-md">
+  <div v-if="declaration" class="q-pa-md">
     <q-card class="details-card">
       <q-card-section class="flex justify-between items-center">
         <span class="field-desc"> İzləmə nömrəsi </span>
@@ -52,9 +52,17 @@
         <span class="field-desc"> Çatdırılma haqqı </span>
         <span class="field-val"> {{ declaration.cargo_price }} AZN </span>
       </q-card-section>
-
     </q-card>
-    <ButtonFooter text="Düzəliş et" icon="edit-white" />
+    <ButtonFooter
+      v-if="
+        declaration.noInvoice === 1 &&
+        declaration.stockCustomsView === 0 &&
+        declaration.noCustomsInvoice === 1
+      "
+      text="Düzəliş et"
+      icon="edit-white"
+      @onButtonClick="openUpdateDeclaration(declaration.id)"
+    />
   </div>
 </template>
 
@@ -68,12 +76,19 @@ export default {
   props: {
     declaration: {
       type: Object,
-      required: true,
+      default: null,
     },
   },
 
   created() {
     this.setPageTitle("Bəyannamənin detalları");
+
+    if (!this.declaration) {
+      this.$router.push({ name: "declarations" });
+    }
+  },
+
+  mounted() {
     this.setButtonFooter(true);
   },
 
@@ -83,6 +98,15 @@ export default {
 
   methods: {
     ...mapActions("shared", ["setPageTitle", "setButtonFooter"]),
+
+    openUpdateDeclaration(id) {
+      this.$router.push({
+        name: "update-declaration",
+        params: {
+          id: id,
+        },
+      });
+    },
   },
 };
 </script>

@@ -1,6 +1,10 @@
 <template>
   <section id="declaration-form" class="q-pa-md">
-    <q-form class="bg-white rounded-borders q-pa-md" @submit.prevent>
+    <q-form
+      v-if="!isLoading"
+      class="bg-white rounded-borders q-pa-md"
+      @submit.prevent
+    >
       <q-input
         type="text"
         v-model="trn_number"
@@ -10,14 +14,63 @@
       />
 
       <q-select
+        multiple
         outlined
+        option-label="category_name"
         v-model="selectedCategory"
-        :options="['1', '2']"
+        :options="categories"
         label="Məhsulun kateqoriyası"
+        :rules="[(val) => !!val || 'Bu sahə doldurulmalıdır']"
       />
+
+      <q-input
+        type="text"
+        v-model="store"
+        outlined
+        label="Mağaza"
+        :rules="[(val) => !!val || 'Bu sahə doldurulmalıdır']"
+      />
+
+      <q-input
+        type="number"
+        v-model="count"
+        outlined
+        label="Məhsul sayı"
+        :rules="[(val) => !!val || 'Bu sahə doldurulmalıdır']"
+      />
+
+      <q-input
+        type="number"
+        v-model="invoicePrice"
+        outlined
+        label="İnvoys qiyməti"
+        :rules="[(val) => !!val || 'Bu sahə doldurulmalıdır']"
+      />
+
+      <q-select
+        outlined
+        disable
+        option-label="name"
+        v-model="selectedBranch"
+        :options="branches"
+        label="Götürəcəyiniz filial"
+        :rules="[(val) => !!val || 'Bu sahə doldurulmalıdır']"
+      />
+
+      <q-input type="textarea" v-model="note" outlined label="Əlavə qeyd" />
     </q-form>
 
-    <ButtonFooter text="Göndər" />
+    <div class="bg-white rounded-borders q-pa-md" v-else>
+      <q-skeleton class="q-mb-md rounded-borders" type="QInput" />
+      <q-skeleton class="q-mb-md rounded-borders" type="QInput" />
+      <q-skeleton class="q-mb-md rounded-borders" type="QInput" />
+      <q-skeleton class="q-mb-md rounded-borders" type="QInput" />
+      <q-skeleton class="q-mb-md rounded-borders" type="QInput" />
+      <q-skeleton class="q-mb-md rounded-borders" type="QInput" />
+      <q-skeleton class="q-mb-md rounded-borders" type="QInput" />
+    </div>
+
+    <ButtonFooter @onButtonClick="onSaveDeclaration" text="Göndər" />
   </section>
 </template>
 
@@ -42,16 +95,24 @@ export default {
       categories: [],
       branches: [],
       errors: {},
-      isLoading: false,
+      isLoading: true,
     };
   },
 
   async created() {
     this.setPageTitle("Bəyan et");
-    this.setButtonFooter(true);
-    // await this.onGetBranches();
-    // await this.onGetCategories();
+
+    await this.onGetBranches();
+    await this.onGetCategories();
     await this.onGetDeclaration();
+  },
+
+  mounted() {
+    this.setButtonFooter(true);
+  },
+
+  destroyed() {
+    this.setButtonFooter(false);
   },
 
   methods: {
@@ -69,22 +130,73 @@ export default {
         this.trn_number = declaration.trn_number;
         this.count = declaration.count;
         this.invoicePrice = declaration.price;
-        this.note = declaration.note;
+        this.note = declaration.note_desc;
         this.store = declaration.shop;
 
-        // this.selected_branch = this.branches.find(
-        //   (b) => b.id === declaration.branch_id_default
-        // );
+        this.selectedBranch = this.branches.find(
+          (b) => b.id === declaration.branch_id_default
+        );
 
-        // declaration.category_id.forEach((c) => {
-        //   this.selected_category.push(this.categories.find((k) => k.id == c));
-        // });
+        declaration.category_id.forEach((c) => {
+          this.selectedCategory.push(this.categories.find((k) => k.id == c));
+        });
+
+        this.isLoading = false;
       } else {
         this.$q.notify({
           message: "Xəta baş verdi.",
           color: "red",
         });
       }
+    },
+
+    async onGetCategories() {
+      const res = await this.$repositories.get("declarations").getCategories();
+
+      if (res.status === 200) {
+        this.categories = res.data.data.declaration_category;
+      }
+    },
+
+    async onGetBranches() {
+      const res = await this.$repositories.get("declarations").branches();
+
+      if (res.status === 200) {
+        this.branches = res.data.data;
+      }
+    },
+
+    async onSaveDeclaration() {
+      this.isLoading = true;
+      const res = await this.$repositories.get("declarations").saveDeclaration({
+        trn_number: this.trn_number,
+        shop: this.store,
+        count: this.count,
+        declarationBalanceTr: this.invoicePrice,
+        note_desc: this.note,
+        declaration_id: this.id,
+        categories: this.selectedCategory.map((c) => c.id),
+      });
+
+      if (res.status === 200) {
+        await this.$router.push({
+          name: "declarations",
+        });
+      }
+
+      // else if (res.data.errors) {
+      //   this.errors = res.data.errors;
+      //   this.isLoading = false;
+      // }
+      //
+      // else {
+      //   this.$toast.open({
+      //     message: "Xəta baş verdi.",
+      //     type: "error",
+      //     position: "bottom",
+      //   });
+      //   this.$router.push("/beyannamelerim");
+      // }
     },
   },
 };

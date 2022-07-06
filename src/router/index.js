@@ -28,8 +28,6 @@ export default function (/* { store, ssrContext } */) {
     base: process.env.VUE_ROUTER_BASE,
   });
 
-  // todo: route adlarin lower case olmalidir.
-
   const publicPages = ["login", "registration"];
 
   Router.beforeEach((to, from, next) => {

@@ -1,5 +1,3 @@
-import { axios } from "src/boot/axios";
-
 const resource = "/api/page";
 const resource_contact = "/api/contact";
 const resource_about = "/api/haqqimizda";
@@ -7,7 +5,7 @@ const resource_faq = "/api/faq";
 const resource_services = "/api/servisler";
 const resource_shops = "/api/magazalar";
 
-export default {
+export default (axios) => ({
   async about() {
     return await axios.get(`${resource_about}`);
   },
@@ -56,4 +54,4 @@ export default {
       }
     }
   },
-};
+});

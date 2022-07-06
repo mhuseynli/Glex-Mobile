@@ -1,4 +1,4 @@
-import { axios } from "src/boot/axios";
+// import { axios } from "src/boot/axios";
 
 // ! Parcel
 const resource_parcels = "api/declarations";
@@ -16,7 +16,7 @@ const resource_insurance = "api/insurance";
 // ! Fined Parcels
 const resource_fined = "api/fined_parcels";
 
-export default {
+export default (axios) => ({
   // # COMMON
 
   async branches() {
@@ -265,4 +265,4 @@ export default {
       }
     }
   },
-};
+});
