@@ -52,6 +52,38 @@
         <span class="field-desc"> Çatdırılma haqqı </span>
         <span class="field-val"> {{ declaration.cargo_price }} AZN </span>
       </q-card-section>
+
+      <q-separator />
+
+      <q-card-section class="flex justify-between items-center">
+        <span class="field-desc"> Status </span>
+        <span class="field-val">
+          <q-badge
+            :color="
+              getStatus(
+                declaration.noInvoice,
+                declaration.stockCustomsView,
+                declaration.noCustomsInvoice
+              ).color
+            "
+            :text-color="
+              getStatus(
+                declaration.noInvoice,
+                declaration.stockCustomsView,
+                declaration.noCustomsInvoice
+              ).textColor
+            "
+            :label="
+              getStatus(
+                declaration.noInvoice,
+                declaration.stockCustomsView,
+                declaration.noCustomsInvoice
+              ).status
+            "
+            class="q-pa-sm"
+          />
+        </span>
+      </q-card-section>
     </q-card>
     <ButtonFooter
       v-if="
@@ -94,6 +126,47 @@ export default {
 
   destroyed() {
     this.setButtonFooter(false);
+  },
+
+  computed: {
+    getStatus() {
+      return (noInvoice, stockCustomsView, noCustomsInvoice) => {
+        if (
+          noInvoice === 1 &&
+          stockCustomsView === 0 &&
+          noCustomsInvoice === 1
+        ) {
+          // * Declaration awaits
+          return {
+            color: "red-2",
+            textColor: "negative",
+            status: "Bəyan gözləyir",
+          };
+        } else if (
+          noInvoice === 0 &&
+          stockCustomsView === 0 &&
+          noCustomsInvoice === 1
+        ) {
+          // * Declaration awaits customs confirmation
+          return {
+            color: "orange-2",
+            textColor: "primary",
+            status: "DGK təsdiq gözləyir",
+          };
+        } else if (
+          noInvoice === 0 &&
+          stockCustomsView === 1 &&
+          noCustomsInvoice === 0
+        ) {
+          // * Declaration confirmed
+          return {
+            color: "green-2",
+            textColor: "positive",
+            status: "Təsdiqlənib",
+          };
+        }
+      };
+    },
   },
 
   methods: {

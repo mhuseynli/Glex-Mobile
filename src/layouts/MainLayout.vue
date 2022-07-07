@@ -59,7 +59,12 @@
 
     <q-footer v-if="!buttonFooter" class="q-px-xs q-py-sm">
       <q-tabs indicator-color="white">
-        <q-route-tab :to="{ name: 'home' }" exact no-caps>
+        <q-route-tab
+          :to="{ name: 'home' }"
+          exact
+          no-caps
+          class="rounded-borders"
+        >
           <svg
             width="20"
             height="20"
@@ -77,7 +82,12 @@
           Əsas
         </q-route-tab>
 
-        <q-route-tab :to="{ name: 'parcels' }" exact no-caps>
+        <q-route-tab
+          :to="{ name: 'parcels' }"
+          exact
+          no-caps
+          class="rounded-borders"
+        >
           <svg
             width="24"
             height="24"
@@ -105,7 +115,12 @@
           Bağlamalar
         </q-route-tab>
 
-        <q-route-tab to="/" exact no-caps>
+        <q-route-tab
+          :to="{ name: 'orders' }"
+          exact
+          no-caps
+          class="rounded-borders"
+        >
           <svg
             width="24"
             height="24"
@@ -130,7 +145,12 @@
           Sifarişlər
         </q-route-tab>
 
-        <q-route-tab :to="{ name: 'menu' }" exact no-caps>
+        <q-route-tab
+          :to="{ name: 'menu' }"
+          exact
+          no-caps
+          class="rounded-borders"
+        >
           <svg
             width="24"
             height="24"

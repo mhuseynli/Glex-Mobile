@@ -3,6 +3,7 @@ import Vuex from "vuex";
 
 import user from "./user";
 import shared from "./shared";
+import orders from "./orders";
 
 Vue.use(Vuex);
 
@@ -20,6 +21,7 @@ export default function (/* { ssrContext } */) {
     modules: {
       user,
       shared,
+      orders,
     },
 
     // enable strict mode (adds overhead!)

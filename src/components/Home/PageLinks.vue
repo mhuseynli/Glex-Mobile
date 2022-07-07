@@ -2,7 +2,13 @@
   <div class="page-links">
     <div class="row q-col-gutter-sm">
       <div class="col-4">
-        <q-btn color="white" class="full-width" no-caps unelevated>
+        <q-btn
+          :to="{ name: 'orders' }"
+          color="white"
+          class="full-width"
+          no-caps
+          unelevated
+        >
           <svg
             width="32"
             height="32"

@@ -5,7 +5,16 @@
       class="bg-white rounded-borders q-pa-md"
       @submit.prevent
     >
+      <q-badge
+        v-if="isLiquid"
+        color="blue-2"
+        text-color="blue"
+        label="Bu məhsul mayedir"
+        class="q-pa-sm q-mb-md"
+      />
+
       <q-input
+        class="q-mb-sm"
         type="text"
         v-model="trn_number"
         outlined
@@ -14,16 +23,18 @@
       />
 
       <q-select
+        class="q-mb-sm"
         multiple
         outlined
         option-label="category_name"
         v-model="selectedCategory"
         :options="categories"
         label="Məhsulun kateqoriyası"
-        :rules="[(val) => !!val || 'Bu sahə doldurulmalıdır']"
+        :rules="[(val) => val.length > 0 || 'Bu sahə doldurulmalıdır']"
       />
 
       <q-input
+        class="q-mb-sm"
         type="text"
         v-model="store"
         outlined
@@ -32,22 +43,31 @@
       />
 
       <q-input
+        class="q-mb-sm"
         type="number"
         v-model="count"
         outlined
         label="Məhsul sayı"
-        :rules="[(val) => !!val || 'Bu sahə doldurulmalıdır']"
+        :rules="[
+          (val) => !!val || 'Bu sahə doldurulmalıdır',
+          (val) => val > 0 || 'Say sıfırdan böyük olmalıdır',
+        ]"
       />
 
       <q-input
+        class="q-mb-sm"
         type="number"
         v-model="invoicePrice"
         outlined
         label="İnvoys qiyməti"
-        :rules="[(val) => !!val || 'Bu sahə doldurulmalıdır']"
+        :rules="[
+          (val) => !!val || 'Bu sahə doldurulmalıdır',
+          (val) => val > 0 || 'Qiymət sıfırdan böyük olmalıdır',
+        ]"
       />
 
       <q-select
+        class="q-mb-sm"
         outlined
         disable
         option-label="name"
@@ -77,6 +97,7 @@
 <script>
 import { mapActions } from "vuex";
 import ButtonFooter from "components/ButtonFooter";
+import { QSpinnerOval } from "quasar";
 
 export default {
   name: "UpdateDeclaration",
@@ -89,6 +110,7 @@ export default {
       count: null,
       invoicePrice: null,
       // pickup_branch: null,
+      isLiquid: null,
       note: null,
       selectedCategory: [],
       selectedBranch: null,
@@ -130,6 +152,7 @@ export default {
         this.trn_number = declaration.trn_number;
         this.count = declaration.count;
         this.invoicePrice = declaration.price;
+        this.isLiquid = declaration.has_liquid !== 0;
         this.note = declaration.note_desc;
         this.store = declaration.shop;
 
@@ -144,8 +167,11 @@ export default {
         this.isLoading = false;
       } else {
         this.$q.notify({
-          message: "Xəta baş verdi.",
+          message: res.data.data.message,
           color: "red",
+        });
+        await this.$router.push({
+          name: "declarations",
         });
       }
     },
@@ -167,7 +193,13 @@ export default {
     },
 
     async onSaveDeclaration() {
-      this.isLoading = true;
+      this.$q.loading.show({
+        spinner: QSpinnerOval,
+        spinnerColor: "primary",
+        spinnerSize: 60,
+        backgroundColor: "black",
+      });
+
       const res = await this.$repositories.get("declarations").saveDeclaration({
         trn_number: this.trn_number,
         shop: this.store,
@@ -179,24 +211,30 @@ export default {
       });
 
       if (res.status === 200) {
+        this.$q.loading.hide();
+        this.$q.notify({
+          message: res.data.data.message,
+          color: "positive",
+        });
+        await this.$router.push({
+          name: "declarations",
+        });
+      } else if (res.data.errors) {
+        this.$q.loading.hide();
+        this.$q.notify({
+          message: "Zəhmət olmasa boşluqları doldurun",
+          color: "red",
+          position: "bottom",
+        });
+      } else {
+        this.$q.notify({
+          message: "Xəta baş verdi.",
+          color: "red",
+        });
         await this.$router.push({
           name: "declarations",
         });
       }
-
-      // else if (res.data.errors) {
-      //   this.errors = res.data.errors;
-      //   this.isLoading = false;
-      // }
-      //
-      // else {
-      //   this.$toast.open({
-      //     message: "Xəta baş verdi.",
-      //     type: "error",
-      //     position: "bottom",
-      //   });
-      //   this.$router.push("/beyannamelerim");
-      // }
     },
   },
 };

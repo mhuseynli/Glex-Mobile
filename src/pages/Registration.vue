@@ -1,5 +1,5 @@
 <template>
-  <section id="login">
+  <section id="registration">
     <div class="row justify-center">
       <svg
         class="logo-section"
@@ -122,7 +122,7 @@
         />
 
         <div class="text-center full-width q-mb-xl">
-          <router-link :to="{ name: 'Login' }">
+          <router-link :to="{ name: 'login' }">
             Hesabınız var? Daxil olun
           </router-link>
         </div>

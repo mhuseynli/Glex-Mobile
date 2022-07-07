@@ -75,10 +75,10 @@ module.exports = function (/* ctx */) {
     devServer: {
       https: false,
       port: 8080,
-      open: true, // opens browser window automatically
+      open: false, // opens browser window automatically
       proxy: {
         '/api': {
-          target: 'https://dev.glex.az/api/v1.0.0',
+          target: 'http://glex.test/api/v1.0.0',
           changeOrigin: true,
           pathRewrite: {
             "^/api": ""
@@ -108,13 +108,16 @@ module.exports = function (/* ctx */) {
       // Quasar plugins
       plugins: [
         'LocalStorage',
-        'Notify'
+        'Notify',
+        'Loading'
       ]
     },
 
     // animations: 'all', // --- includes all animations
     // https://v1.quasar.dev/options/animations
-    animations: [],
+    animations: [
+
+    ],
 
     // https://v1.quasar.dev/quasar-cli/developing-ssr/configuring-ssr
     ssr: {

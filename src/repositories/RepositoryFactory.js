@@ -8,7 +8,7 @@ import { axios } from "src/boot/axios";
 import LoginRepository from "./LoginRepository";
 // import PaymentRepository from "./PaymentRepository";
 import DeclarationsRepository from "./DeclarationsRepository";
-// import OrdersRepository from "./OrdersRepository";
+import OrdersRepository from "./OrdersRepository";
 // import CourierRepository from "./CourierRepository";
 // import SettingsRepository from "./SettingsRepository";
 // import AddressesAbroad from "./AddressesAbroad";
@@ -53,6 +53,7 @@ const repositories = {
 
   // # DASHBOARD
   declarations: DeclarationsRepository(axios),
+  orders: OrdersRepository(axios),
 };
 
 export default {

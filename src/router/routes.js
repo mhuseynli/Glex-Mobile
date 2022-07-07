@@ -40,6 +40,16 @@ const routes = [
         name: "update-declaration",
         component: () => import("pages/Declarations/UpdateDeclaration.vue"),
       },
+      {
+        path: "/orders",
+        name: "orders",
+        component: () => import("pages/Orders/Orders.vue"),
+      },
+      {
+        path: "/orders/new",
+        name: "new-order",
+        component: () => import("pages/Orders/NewOrder.vue")
+      }
     ],
   },
   {

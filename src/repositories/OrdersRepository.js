@@ -2,10 +2,10 @@ const resource = "api/orders";
 const resource_cart = "api/cart";
 const resource_count = "api/cart_count";
 
-export default $axios => ({
+export default axios => ({
   async all() {
     try {
-      const data = await $axios({
+      const data = await axios({
         method: "GET",
         url: resource
       });
@@ -20,7 +20,7 @@ export default $axios => ({
 
   async show(id) {
     try {
-      const data = await $axios({
+      const data = await axios({
         method: "GET",
         url: `${resource}/${id}`
       });
@@ -35,7 +35,7 @@ export default $axios => ({
 
   async update(payload) {
     try {
-      const data = await $axios({
+      const data = await axios({
         method: "PUT",
         url: resource,
         data: payload
@@ -51,7 +51,7 @@ export default $axios => ({
 
   async options() {
     try {
-      const data = await $axios({
+      const data = await axios({
         method: "GET",
         url: `${resource}/create`
       });
@@ -66,7 +66,7 @@ export default $axios => ({
 
   async create(type, orders) {
     try {
-      const data = await $axios({
+      const data = await axios({
         method: "POST",
         url: resource,
         data: {
@@ -85,7 +85,7 @@ export default $axios => ({
 
   async payment(payload) {
     try {
-      const data = await $axios({
+      const data = await axios({
         method: "POST",
         url: `${resource}/pay`,
         data: {
@@ -103,7 +103,7 @@ export default $axios => ({
 
   async delete(payload) {
     try {
-      const data = await $axios({
+      const data = await axios({
         method: "DELETE",
         url: resource,
         data: {
@@ -121,7 +121,7 @@ export default $axios => ({
 
   async cart() {
     try {
-      const data = await $axios({
+      const data = await axios({
         method: "GET",
         url: resource_cart
       });
@@ -136,7 +136,7 @@ export default $axios => ({
 
   async count() {
     try {
-      const data = await $axios({
+      const data = await axios({
         method: "GET",
         url: resource_count
       });

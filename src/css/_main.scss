@@ -110,6 +110,26 @@ body {
   }
 }
 
+// # Auth
+
+#login,
+#registration {
+  .q-input .q-field__control {
+    font-size: 14px;
+    line-height: 18px;
+    font-family: m_h_medium;
+    padding: 0 16px;
+
+    input {
+      color: $text-secondary;
+    }
+
+    &::before {
+      border: $main-stroke;
+    }
+  }
+}
+
 // # Menu
 
 .menu {
@@ -249,33 +269,37 @@ body {
     }
   }
 
-  &__data {
-    .col-6:not(:last-child) {
-      margin-bottom: 24px;
-    }
-
+  &__head {
     .field-desc {
-      font-family: m_m_regular;
-      color: $text-secondary;
-      font-size: 14px;
-      line-height: 18px;
-      margin-bottom: 8px;
+      margin-bottom: 2px !important;
     }
+  }
 
-    .field-val {
-      font-family: m_m_medium;
-      color: $text-main;
-      font-size: 16px;
-      line-height: 20px;
-      margin: 0;
-    }
+  .col-6:not(:last-child) {
+    margin-bottom: 24px;
+  }
 
-    .long-text {
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      max-width: 110px;
-    }
+  .field-desc {
+    font-family: m_m_regular;
+    color: $text-secondary;
+    font-size: 14px;
+    line-height: 18px;
+    margin-bottom: 8px;
+  }
+
+  .field-val {
+    font-family: m_m_medium;
+    color: $text-main;
+    font-size: 16px;
+    line-height: 20px;
+    margin: 0;
+  }
+
+  .long-text {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 110px;
   }
 }
 
@@ -296,5 +320,21 @@ body {
     font-size: 16px;
     line-height: 20px;
     color: $text-main;
+  }
+}
+
+.order-card {
+  box-shadow: 0px 12px 56px rgba(0, 0, 0, 0.06);
+  border-radius: 8px;
+
+  &__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    h2 {
+      font-family: m_h_semibold;
+      font-size: 21px;
+      line-height: 30px;
+    }
   }
 }
