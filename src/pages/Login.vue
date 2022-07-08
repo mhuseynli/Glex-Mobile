@@ -25,6 +25,8 @@
       <h1 class="main-title text-center text-dark q-mb-xl full-width">
         Xoş gəlmişsiniz! <br />
         Hesabınıza daxil olun və ya qeydiyyatdan keçin
+
+        {{ log }}
       </h1>
 
       <q-form @submit.prevent="onLogin" class="full-width">
@@ -95,6 +97,8 @@ export default {
       email: null,
       password: null,
       isPwd: true,
+
+      log: null,
     };
   },
   methods: {
@@ -109,12 +113,15 @@ export default {
     },
 
     async onLogin() {
+      this.log = "now logging in...";
       const res = await this.$repositories.get("login").login({
         email: this.email,
         password: this.password,
       });
-
+      this.log = "now request in...";
+      this.log = res;
       if (res.status === 200) {
+        this.log = res.data.data
         this.logUserIn(res.data.data);
         // this.loginForm.isLoading = false;
       }

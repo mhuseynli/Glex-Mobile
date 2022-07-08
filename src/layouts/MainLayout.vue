@@ -57,7 +57,7 @@
       <router-view />
     </q-page-container>
 
-    <q-footer v-if="!buttonFooter" class="q-px-xs q-py-sm">
+    <q-footer v-if="!buttonFooter && !hasNoFooter" class="q-px-xs q-py-sm">
       <q-tabs indicator-color="white">
         <q-route-tab
           :to="{ name: 'home' }"
@@ -195,11 +195,17 @@ export default {
   data() {
     return {
       leftDrawerOpen: false,
+
+      pagesWithoutFooter: ["new-order"],
     };
   },
 
   computed: {
     ...mapGetters("shared", ["buttonFooter"]),
+
+    hasNoFooter() {
+      return this.pagesWithoutFooter.includes(this.$route.name);
+    },
   },
 };
 </script>

@@ -1,4 +1,4 @@
-class CartItem {
+export class CartItem {
   constructor() {
     this.link = "";
     this.category = null;

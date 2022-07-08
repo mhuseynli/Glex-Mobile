@@ -78,7 +78,7 @@ module.exports = function (/* ctx */) {
       open: false, // opens browser window automatically
       proxy: {
         '/api': {
-          target: 'http://glex.test/api/v1.0.0',
+          target: 'https://dev.glex.az/api/v1.0.0',
           changeOrigin: true,
           pathRewrite: {
             "^/api": ""
