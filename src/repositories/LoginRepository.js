@@ -1,10 +1,10 @@
-const resource_login = "/login";
-const resource_logout = "/logout";
+const resource_login = "login";
+const resource_logout = "logout";
 
-export default (http, options) => ({
+export default (Http, options) => ({
   async login(payload) {
     try {
-      const data = await http.request({
+      const data = await Http.request({
         method: "POST",
         url: `${options.url}/${resource_login}`,
         data: {

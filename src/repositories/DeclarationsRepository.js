@@ -1,18 +1,18 @@
 // ! Parcel
-const resource_parcels = "/declarations";
-const resource_headings = "/declarations/headers";
-const resource_pay_parcels = "/declarations/pay_orders";
+const resource_parcels = "declarations";
+const resource_headings = "declarations/headers";
+const resource_pay_parcels = "declarations/pay_orders";
 
 // ! Declaration
-const resource_declarations = "/declaration";
-const resource_categories = "/declaration_categories";
-const resource_branches = "/branch";
+const resource_declarations = "declaration";
+const resource_categories = "declaration_categories";
+const resource_branches = "branch";
 
 // ! Insurance
-const resource_insurance = "/insurance";
+const resource_insurance = "insurance";
 
 // ! Fined Parcels
-const resource_fined = "/fined_parcels";
+const resource_fined = "fined_parcels";
 
 export default (Http, options) => ({
   // # COMMON
