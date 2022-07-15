@@ -1,4 +1,5 @@
-import { axios } from "src/boot/axios";
+import { Http } from "@capacitor-community/http";
+import { options } from "boot/http-capacitor";
 
 // import TariffsRepository from "./TariffsRepository";
 // import IndexRepository from "./IndexRepository";
@@ -43,17 +44,17 @@ import StaticRepository from "./StaticRepository";
 
 const repositories = {
   // # AUTH
-  login: LoginRepository(axios),
+  login: LoginRepository(Http, options),
 
   // todo find a way to send it axios parameter
   user: UserRepository,
 
   // # PUBLIC
-  common: StaticRepository(axios),
+  common: StaticRepository(Http, options),
 
   // # DASHBOARD
-  declarations: DeclarationsRepository(axios),
-  orders: OrdersRepository(axios),
+  declarations: DeclarationsRepository(Http, options),
+  orders: OrdersRepository(Http, options),
 };
 
 export default {

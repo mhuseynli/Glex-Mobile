@@ -1,29 +1,28 @@
-// import { axios } from "src/boot/axios";
-
 // ! Parcel
-const resource_parcels = "api/declarations";
-const resource_headings = "api/declarations/headers";
-const resource_pay_parcels = "api/declarations/pay_orders";
+const resource_parcels = "/declarations";
+const resource_headings = "/declarations/headers";
+const resource_pay_parcels = "/declarations/pay_orders";
 
 // ! Declaration
-const resource_declarations = "api/declaration";
-const resource_categories = "api/declaration_categories";
-const resource_branches = "api/branch";
+const resource_declarations = "/declaration";
+const resource_categories = "/declaration_categories";
+const resource_branches = "/branch";
 
 // ! Insurance
-const resource_insurance = "api/insurance";
+const resource_insurance = "/insurance";
 
 // ! Fined Parcels
-const resource_fined = "api/fined_parcels";
+const resource_fined = "/fined_parcels";
 
-export default (axios) => ({
+export default (Http, options) => ({
   // # COMMON
 
   async branches() {
     try {
-      const data = await axios({
+      const data = await Http.request({
         method: "GET",
-        url: resource_branches,
+        url: `${options.url}/${resource_branches}`,
+        headers: options.headers,
       });
 
       return data;
@@ -38,9 +37,10 @@ export default (axios) => ({
 
   async headings() {
     try {
-      const data = await axios({
+      const data = await Http.request({
         method: "GET",
-        url: resource_headings,
+        url: `${options.url}/${resource_headings}`,
+        headers: options.headers,
       });
 
       return data;
@@ -53,12 +53,13 @@ export default (axios) => ({
 
   async getByStatusId(id) {
     try {
-      const data = await axios({
+      const data = await Http.request({
         method: "POST",
-        url: resource_parcels,
+        url: `${options.url}/${resource_parcels}`,
         data: {
           status_id: id,
         },
+        headers: options.headers,
       });
 
       return data;
@@ -71,12 +72,13 @@ export default (axios) => ({
 
   async paginate(id, page) {
     try {
-      const data = await axios({
+      const data = await Http.request({
         method: "POST",
         url: `${resource_parcels}?page=${page}`,
         data: {
           status_id: id,
         },
+        headers: options.headers,
       });
 
       return data;
@@ -91,9 +93,10 @@ export default (axios) => ({
 
   async declarations() {
     try {
-      const data = await axios({
+      const data = await Http.request({
         method: "GET",
-        url: resource_declarations,
+        url: `${options.url}/${resource_declarations}`,
+        headers: options.headers,
       });
 
       return data;
@@ -106,12 +109,13 @@ export default (axios) => ({
 
   async payment(payload) {
     try {
-      const data = await axios({
+      const data = await Http.request({
         method: "POST",
-        url: resource_pay_parcels,
+        url: `${options.url}/${resource_pay_parcels}`,
         data: {
           orders: payload,
         },
+        headers: options.headers,
       });
 
       return data;
@@ -124,9 +128,10 @@ export default (axios) => ({
 
   async getDeclaration(id) {
     try {
-      const data = await axios({
+      const data = await Http.request({
         method: "GET",
-        url: `${resource_declarations}/${id}`,
+        url: `${options.url}/${resource_declarations}/${id}`,
+        headers: options.headers,
       });
 
       return data;
@@ -139,10 +144,11 @@ export default (axios) => ({
 
   async saveDeclaration(payload) {
     try {
-      const data = await axios({
+      const data = await Http.request({
         method: "PUT",
-        url: `${resource_declarations}`,
+        url: `${options.url}/${resource_declarations}`,
         data: payload,
+        headers: options.headers,
       });
 
       return data;
@@ -155,9 +161,10 @@ export default (axios) => ({
 
   async getCategories() {
     try {
-      const data = await axios({
+      const data = await Http.request({
         method: "GET",
-        url: `${resource_categories}`,
+        url: `${options.url}/${resource_categories}`,
+        headers: options.headers,
       });
 
       return data;
@@ -170,7 +177,7 @@ export default (axios) => ({
 
   // async edit(id) {
   //   try {
-  //     const data = await axios({
+  //     const data = await Http({
   //       method: "GET",
   //       url: resource_declarations
   //     });
@@ -187,9 +194,9 @@ export default (axios) => ({
 
   async insuranceTypes() {
     try {
-      const data = await axios({
+      const data = await Http({
         method: "GET",
-        url: `${resource_insurance}/types`,
+        url: `${options.url}/${resource_insurance}/types`,
       });
 
       return data;
@@ -202,9 +209,9 @@ export default (axios) => ({
 
   async createInsurance(payload) {
     try {
-      const data = await axios({
+      const data = await Http({
         method: "POST",
-        url: resource_insurance,
+        url: `${options.url}/${resource_insurance}`,
         data: payload,
       });
 
@@ -220,9 +227,9 @@ export default (axios) => ({
 
   async finedParcels() {
     try {
-      const data = await axios({
+      const data = await Http({
         method: "GET",
-        url: resource_fined,
+        url: `${options.url}/${resource_fined}`,
       });
 
       return data;
@@ -235,9 +242,9 @@ export default (axios) => ({
 
   async finedParcelCount() {
     try {
-      const data = await axios({
+      const data = await Http({
         method: "GET",
-        url: `${resource_fined}/count`,
+        url: `${options.url}/${resource_fined}/count`,
       });
 
       return data;
@@ -250,9 +257,9 @@ export default (axios) => ({
 
   async payFined(payload) {
     try {
-      const data = await axios({
+      const data = await Http({
         method: "POST",
-        url: `${resource_fined}/pay_fined`,
+        url: `${options.url}/${resource_fined}/pay_fined`,
         data: {
           orders: payload,
         },

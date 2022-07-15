@@ -1,13 +1,15 @@
-import { axios } from "src/boot/axios";
+import { Http } from "@capacitor-community/http";
+import { options } from "boot/http-capacitor";
 
-const resource = "/api/userdata";
+const resource = "userdata";
 
 export default {
   async data() {
     try {
-      const data = await axios({
+      const data = await Http.request({
         method: "GET",
-        url: resource,
+        url: `${options.url}/${resource}`,
+        headers: options.headers,
       });
 
       return data;

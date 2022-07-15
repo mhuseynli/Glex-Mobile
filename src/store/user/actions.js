@@ -1,5 +1,5 @@
 import { LocalStorage } from "quasar";
-import { axios } from "src/boot/axios";
+import { options } from "src/boot/http-capacitor";
 
 import Repository from "src/repositories/RepositoryFactory";
 const UserRepository = Repository.get("user");
@@ -13,7 +13,7 @@ export function logUserIn({ commit, dispatch }, payload) {
 }
 
 export async function setUserData({ commit }, payload) {
-  axios.defaults.headers.common["token"] = payload;
+  options.headers.token = payload;
   const res = await UserRepository.data();
 
   if (res.status === 200) {

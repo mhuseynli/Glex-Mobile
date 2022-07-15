@@ -1,16 +1,17 @@
-const resource_login = "/api/login";
-const resource_logout = "/api/logout";
+const resource_login = "/login";
+const resource_logout = "/logout";
 
-export default (axios) => ({
+export default (http, options) => ({
   async login(payload) {
     try {
-      const data = await axios({
+      const data = await http.request({
         method: "POST",
-        url: resource_login,
+        url: `${options.url}/${resource_login}`,
         data: {
           email: payload.email,
           password: payload.password,
         },
+        headers: options.headers,
       });
 
       return data;
