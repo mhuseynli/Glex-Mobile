@@ -117,7 +117,7 @@
           unelevated
           no-caps
           class="q-mb-md"
-          color="primary full-width"
+          color="primary full-width rounded-borders"
           label="Qeydiyyatı bitir"
         />
 

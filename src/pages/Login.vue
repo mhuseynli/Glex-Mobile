@@ -61,7 +61,7 @@
           unelevated
           no-caps
           class="q-mb-md"
-          color="primary full-width"
+          color="primary full-width rounded-borders"
           label="Daxil ol"
         />
 
@@ -76,7 +76,7 @@
           unelevated
           outline
           no-caps
-          color="primary full-width"
+          color="primary full-width rounded-borders"
           label="Qeydiyyat"
         />
       </q-form>
@@ -141,7 +141,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.q-btn {
-  border-radius: 8px;
-}
 </style>
